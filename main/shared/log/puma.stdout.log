@@ -1,0 +1,28 @@
+=== puma startup: 2017-05-30 00:55:12 +0800 ===
+[35432] * Starting control server on unix:///var/folders/1j/pd_fq26n12q4z422xcl41wx00000gn/T/puma-status-1496076912025-35432
+[35432] - Worker 1 (pid: 35434) booted, phase: 0
+[35432] - Worker 0 (pid: 35433) booted, phase: 0
+[35432] - Gracefully shutting down workers...
+[35432] === puma shutdown: 2017-05-30 00:55:35 +0800 ===
+[35432] - Goodbye!
+=== puma startup: 2017-05-30 00:56:09 +0800 ===
+[35495] * Starting control server on unix:///var/folders/1j/pd_fq26n12q4z422xcl41wx00000gn/T/puma-status-1496076969112-35495
+[35495] - Worker 1 (pid: 35497) booted, phase: 0
+[35495] - Worker 0 (pid: 35496) booted, phase: 0
+[35495] - Gracefully shutting down workers...
+[35495] === puma shutdown: 2017-05-30 00:58:00 +0800 ===
+[35495] - Goodbye!
+=== puma startup: 2017-05-30 00:58:05 +0800 ===
+[35691] * Starting control server on unix:///var/folders/1j/pd_fq26n12q4z422xcl41wx00000gn/T/puma-status-1496077085121-35691
+[35691] - Worker 1 (pid: 35693) booted, phase: 0
+[35691] - Worker 0 (pid: 35692) booted, phase: 0
+[35691] - Gracefully shutting down workers...
+[35691] === puma shutdown: 2017-05-30 00:58:17 +0800 ===
+[35691] - Goodbye!
+=== puma startup: 2017-05-30 00:58:54 +0800 ===
+[35758] * Starting control server on unix:///var/folders/1j/pd_fq26n12q4z422xcl41wx00000gn/T/puma-status-1496077134554-35758
+[35758] - Worker 1 (pid: 35760) booted, phase: 0
+[35758] - Worker 0 (pid: 35759) booted, phase: 0
+[35758] - Gracefully shutting down workers...
+[35758] === puma shutdown: 2017-05-30 00:59:14 +0800 ===
+[35758] - Goodbye!
