@@ -1,4 +1,5 @@
 main/log
 main/public/assets
-main/shared
+main/shared/log
+main/shared/pids
 main/tmp
