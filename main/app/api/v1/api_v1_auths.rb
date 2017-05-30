@@ -18,14 +18,35 @@ module ApiV1Auths
 
       ###########
 
-      desc '获取绑定的用户列表 post /api/v1.2/auths/binded_users_list'
+      desc ''
       params do
-        optional :wx_openid, type: String#, allow_blank: false
-        optional :wx_unionid, type: String
-        at_least_one_of :wx_openid, :wx_unionid
+        requires :private, type: Boolean, default: false
       end
-      post :public_repo do
-        
+      get :github_login do
+        state_str = SecureRandom.urlsafe_base64(nil, false)
+        next_location = "https://github.com/login/oauth/authorize?" +
+          "response_type=code&" +
+          "redirect_uri=http://protobuilder.io/api/v1/auths/github_callback&" +
+          "scope=public_repo,read:org,user:email&" +
+          "state=" + state_str + "&" +
+          "client_id=23ab448fa68cded59495"
+        res1 = Net::HTTP.get_response(URI(next_location))
+        next_location = res1.to_hash["location"]
+        status 302
+        header 'location', next_location
+      end
+
+      ###########
+
+
+      desc ''
+      params do
+        requires :private, type: Boolean, default: false
+      end
+      get :github_callback do
+        github = Github.new client_id: '23ab448fa68cded59495', client_secret: '212ed35e9b844837d7a671606b30d516d1d5bd95'
+        token = github.get_token(params[:code])
+        (github.repos.list user: :k12ke).to_json
       end
 
       ###########
