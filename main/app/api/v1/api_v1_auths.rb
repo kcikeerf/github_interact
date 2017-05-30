@@ -45,8 +45,7 @@ module ApiV1Auths
       end
       get :github_callback do
         github = Github.new client_id: '23ab448fa68cded59495', client_secret: '212ed35e9b844837d7a671606b30d516d1d5bd95'
-        token = github.get_token(params[:code])
-        (github.repos.list user: :k12ke).to_json
+        token = github.get_token(params[:code])        
       end
 
       ###########
