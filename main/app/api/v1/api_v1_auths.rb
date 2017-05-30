@@ -46,6 +46,9 @@ module ApiV1Auths
       get :github_callback do
         github = Github.new client_id: '23ab448fa68cded59495', client_secret: '212ed35e9b844837d7a671606b30d516d1d5bd95'
         token = github.get_token(params[:code])        
+              
+#        status 307
+ #       header 'location', "http://protobuilder.io/?access_token=#{token.to_hash["access_token"]}"
       end
 
       ###########
