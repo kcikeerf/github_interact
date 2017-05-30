@@ -27,7 +27,7 @@ module ApiV1Auths
         state_str = SecureRandom.urlsafe_base64(nil, false)
         next_location = "https://github.com/login/oauth/authorize?" +
           "response_type=code&" +
-          "redirect_uri=http://protobuilder.io/api/v1/auths/github_callback://&" +
+          "redirect_uri=http://protobuilder.io/api/v1/auths/github_callback&" +
           "scope=public_repo,read:org,user:email&" +
           "state=" + state_str + "&" +
           "client_id=23ab448fa68cded59495"
