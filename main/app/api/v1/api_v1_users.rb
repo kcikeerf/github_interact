@@ -1,16 +1,17 @@
 # -*- coding: UTF-8 -*-
 
-module ApiV1Github
+module ApiV1Users
   class API < Grape::API
     format :json
 
     helpers ApiV1Helper
+    helpers ApiV1SharedParamsHelper
 
     params do
       #
     end
 
-    resource :github do #monitorings begin
+    resource :users do #monitorings begin
 
       before do
         set_api_header
@@ -18,14 +19,12 @@ module ApiV1Github
 
       ###########
 
-      desc 'callback api'
+      desc ''
       params do
-        # optional :wx_openid, type: String#, allow_blank: false
-        # optional :wx_unionid, type: String
-        # at_least_one_of :wx_openid, :wx_unionid
+        use :oauth
       end
-      get :callback do
-        p params
+      post :info do
+        current_user
       end
 
       ###########
