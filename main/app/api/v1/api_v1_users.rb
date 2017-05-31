@@ -14,7 +14,7 @@ module ApiV1Users
     resource :users do #monitorings begin
 
       before do
-        set_api_header
+        set_resp_header
       end
 
       ###########
