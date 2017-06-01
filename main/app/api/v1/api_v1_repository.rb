@@ -32,14 +32,15 @@ module ApiV1Repository
           :sort => "created",
           :direction => "desc"
         }
-        github_req "/user/repos","get", paramsh.merge(params)
+        result = github_req("/user/repos","get", paramsh.merge(params))
+        format_response(params, result)
       end
 
       ###########
 
       desc ''
       params do
-        required :name, type: String
+        requires :name, type: String
         optional :description, type: String 
         optional :homepage, type: String
         optional :private, type: Boolean
@@ -53,17 +54,19 @@ module ApiV1Repository
           :private => false,
           :auto_init => true
         }
-        github_req "/user/repos","post", paramsh.merge(params)
+        result = github_req("/user/repos","post", paramsh.merge(params))
+        format_response(params, result)
       end
 
       ###########
 
       desc ''
       params do
-        required :name, type: String
+        requires :name, type: String
       end
       post :delete do
-        github_req "/repos/" + current_user["name"] + "/" + params[:name],"delete", nil
+        result = github_req("/repos/" + current_user["name"] + "/" + params[:name],"delete", nil)
+        format_response(params, result)
       end
 
       ###########      

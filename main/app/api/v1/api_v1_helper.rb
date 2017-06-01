@@ -7,8 +7,12 @@ module ApiV1Helper
     header 'Access-Control-Allow-Headers', 'x-requested-with,Content-Type, Authorization'    
   end
 
+  def resp_formatter
+
+  end
+
   def github
-  	Github.new client_id: '23ab448fa68cded59495', client_secret: '212ed35e9b844837d7a671606b30d516d1d5bd95'
+  	Github.new client_id: Common::ClientId, client_secret: Common::ClientSecret
   end
 
   def current_user
@@ -58,4 +62,35 @@ module ApiV1Helper
     
     JSON.parse(res.body)
   end
+
+  # Used for format the response data if have callback parameter    
+  def format_response target_params, target_result
+    callback_str = target_params[:callback].blank? ? "3,,no" : ((target_params[:callback]=='window.name')? "1,,#{target_params[:callback]}" : "2,,#{target_params[:callback]}")
+    callback_arr = callback_str.split(',,')
+
+    case target_result.class.to_s
+    when 'Hash','Array'#Array maybe no this type
+      data_json = target_result.to_json
+    when 'String'
+      data_json = target_result
+    end 
+
+    case callback_arr[0].to_i
+    #如果request中带有callback参数，并且callback等于"window.name"
+    when 1
+      header "Content-Type", "text/html"
+      '<script type="text" id="json">
+         {"data":' + data_json + '}
+      </script>
+      <script type="text/javascript">window.name=document.getElementById("json").innerHTML;</script>'
+    #如果request中带有callback参数，并且callback不等于"window.name"（例如是"xui.SAjax.No._1"）
+    when 2
+      header "Content-Type", "text/html"
+      callback_arr[1] + '({"data":' + data_json + '}});'
+    #如果request中没有callback
+    when 3
+      { :data => target_result }
+    end
+  end
+  
 end

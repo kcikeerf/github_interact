@@ -32,7 +32,7 @@ module ApiV1Auths
           "redirect_uri=http://protobuilder.io/api/v1/auths/github_callback&" +
           "scope=" + scope_arr.join(',') + "&" +
           "state=" + state_str + "&" +
-          "client_id=23ab448fa68cded59495"
+          "client_id=" + Common::ClientId
         res1 = Net::HTTP.get_response(URI(next_location))
         next_location = res1.to_hash["location"]
         status 302
