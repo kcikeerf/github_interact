@@ -43,7 +43,7 @@ module ApiV1Helper
       req = Net::HTTP::Get.new(target_api)
     when "post"
       req = Net::HTTP::Post.new(target_api)
-      req.set_form_data(param_data)
+      req.body = param_data.to_json
     when "delete"
       req = Net::HTTP::Delete.new(target_api)
     end
@@ -61,8 +61,8 @@ module ApiV1Helper
     res = Net::HTTP.start(uri.host, uri.port, :use_ssl => true) {|http|
       http.request(req) 
     }
-    
-    JSON.parse(res.body)
+
+    res.body.blank?? {} : JSON.parse(res.body)
   end
 
   # Used for format the response data if have callback parameter    
