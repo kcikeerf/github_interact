@@ -31,17 +31,19 @@ module ApiV1Helper
     JSON.parse(res.body)
   end
 
-  def github_req target_api, http_method, header_h={}
+  def github_req target_api, http_method, param_data={}, header_h={}
     base_url = "https://api.github.com"
-    target_api = base_url + "/user"
+    target_api = base_url + target_api
     uri = URI(target_api)
 
     req = nil
     case http_method
     when "get"
+      target_api += "?" + URI.encode_www_form(param_data) if !param_data.blank?
       req = Net::HTTP::Get.new(target_api)
     when "post"
       req = Net::HTTP::Post.new(target_api)
+      req.set_form_data(param_data)
     when "delete"
       req = Net::HTTP::Delete.new(target_api)
     end
