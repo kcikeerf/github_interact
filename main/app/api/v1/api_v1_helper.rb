@@ -46,6 +46,8 @@ module ApiV1Helper
       req.body = param_data.to_json
     when "delete"
       req = Net::HTTP::Delete.new(target_api)
+    when "patch"
+      req = Net::HTTP::Patch.new(target_api)
     end
     return nil unless req
 
