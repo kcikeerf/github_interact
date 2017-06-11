@@ -66,6 +66,3 @@ gem 'aws-sdk'
 gem 'aws-sdk-rails'
 gem 'aws-record'
 gem 'github_api', :github => "piotrmurach/github"
-
-
-gem 'rdoc'
