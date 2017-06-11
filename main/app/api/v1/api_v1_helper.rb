@@ -1,6 +1,12 @@
 # -*- coding: UTF-8 -*-
 require 'net/https'
+require 'logger'
+
 module ApiV1Helper
+  def logger
+    Rails.logger
+  end
+
   def set_resp_header
     header 'Access-Control-Allow-Origin','*'
     header 'Access-Control-Request-Method', 'GET, POST, PUT, OPTIONS, HEAD'
@@ -12,11 +18,15 @@ module ApiV1Helper
   end
 
   def github
-  	Github.new client_id: Common::ClientId, client_secret: Common::ClientSecret
+    Github.new client_id: Common::ClientId, client_secret: Common::ClientSecret
+  end
+
+  def github_base_url
+    "https://api.github.com"
   end
 
   def current_user
-    target_api = "https://api.github.com/user"
+    target_api = github_base_url + "/user"
     uri = URI(target_api)
     req = Net::HTTP::Get.new(target_api)
     req['User-Agent'] = 'xui'
@@ -32,8 +42,9 @@ module ApiV1Helper
   end
 
   def github_req target_api, http_method, param_data={}, header_h={}
-    base_url = "https://api.github.com"
-    target_api = base_url + target_api
+    logger.info "github request"
+    logger.info target_api
+    target_api = github_base_url + target_api
     uri = URI(target_api)
 
     req = nil
@@ -48,6 +59,9 @@ module ApiV1Helper
       req = Net::HTTP::Delete.new(target_api)
     when "patch"
       req = Net::HTTP::Patch.new(target_api)
+    when "put"
+      req = Net::HTTP::Put.new(target_api)
+      req.body = param_data.to_json
     end
     return nil unless req
 
@@ -96,5 +110,10 @@ module ApiV1Helper
       { :data => target_result }
     end
   end
-  
+
+  def file_to_base64 path
+    Base64.encode64(File.open(path, "rb").read)
+  end
+
+
 end

@@ -1,0 +1,36 @@
+﻿{list:[{
+	id:'24x24',
+	width:24,
+	height:24,
+	caption:{
+		cn:'24x24 像素'
+	}
+},{
+	id:'32x32',
+	width:32,
+	height:32,
+	caption:{
+		cn:'32x32 像素'
+	}
+},{
+	id:'48x48',
+	width:48,
+	height:48,
+	caption:{
+		cn:'48x48 像素'
+	}
+},{
+	id:'64x64',
+	width:64,
+	height:64,
+	caption:{
+		cn:'64x64 像素'
+	}
+},{
+	id:'128x128',
+	width:128,
+	height:128,
+	caption:{
+		cn:'128x128 像素'
+	}
+}]}

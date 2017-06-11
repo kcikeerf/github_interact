@@ -1,0 +1,13 @@
+﻿{list:[{
+	id:'16x16',
+	caption:{
+		cn:'16x16 像素'
+	}
+},{
+	id:'24x24',
+	width:24,
+	height:24,
+	caption:{
+		cn:'24x24 像素'
+	}
+}]}

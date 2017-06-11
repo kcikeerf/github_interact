@@ -24,6 +24,7 @@ module ApiV1Repository
         optional :type, type: String, values: %W{ all owner public private member }
         optional :sort, type: String, values: %W{ created updated pushed full_name }
         optional :direction, type: String, values: %W{ asc desc }
+        use :oauth
       end
       post :list do
         #github.repos.list user: current_user["name"]
@@ -45,6 +46,7 @@ module ApiV1Repository
         optional :homepage, type: String
         optional :private, type: Boolean
         optional :auto_init, type: Boolean
+        use :oauth
       end
       post :create do
         #github.repos.list user: current_user["name"]
@@ -63,6 +65,7 @@ module ApiV1Repository
       desc ''
       params do
         requires :name, type: String
+        use :oauth
       end
       post :delete do
         result = github_req("/repos/" + current_user["name"] + "/" + params[:name],"delete", nil)
@@ -77,6 +80,7 @@ module ApiV1Repository
         optional :description, type: String 
         optional :homepage, type: String
         optional :private, type: Boolean
+        use :oauth
       end
       post :edit do
         result = github_req("/repos/" + current_user["name"] + "/" + params[:name],"patch", params)
@@ -88,6 +92,7 @@ module ApiV1Repository
       desc ''
       params do
         requires :name, type: String
+        use :oauth
       end
       post :detail do
         result = github_req("/repos/" + current_user["name"] + "/" + params[:name],"get", params)
@@ -100,6 +105,7 @@ module ApiV1Repository
       params do
         requires :name, type: String
         optional :path, type: String #查看文件路径，默认根目录
+        use :oauth
       end
       post :file_list do
         result = github_req("/repos/" + current_user["name"] + "/" + params[:name] + "/contents/", "get", params)
@@ -110,18 +116,20 @@ module ApiV1Repository
 
       desc '上传文件'
       params do
-        requires :name, type: String
-        requires :path, type: String # 上传文件路径
+        requires :name, type: String, allow_blank: false
+        requires :target_file_path, type: String, allow_blank: false
+        requires :path, type: String, allow_blank: false# 上传文件路径
         requires :message, type: String # 上传信息
-        # requires :content, type: String # Base64文件编码
-        optional :branch, type:String # 默认master
+        use :oauth
       end
       post :commit_file do
         # 此处实现文件Base64转换
         paramsh = {
-          :content => #文件Base64转换
+          :content => file_to_base64(params[:target_file_path]),
+          :message => params[:message]
         }
-        result = github_req("/repos/" + current_user["name"] + "/" + params[:name] + "/contents/" + params[:path], "put", paramsh.merge(params))
+
+        result = github_req("/repos/" + current_user["name"] + "/" + params[:name] + "/contents/" + params[:path], "put", paramsh)
         format_response(params, result)
       end
 
@@ -134,6 +142,7 @@ module ApiV1Repository
         requires :message, type: String # 上传信息
         requires :sha, type: String # 文件Blob SHA
         optional :branch, type:String # 默认master
+        use :oauth
       end
       post :delete_file do
         result = github_req("/repos/" + current_user["name"] + "/" + params[:name] + "/contents/" + params[:path], "delete", params)

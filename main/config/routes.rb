@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   mount ApiV1Auths::API => "/api/v1/"
   mount ApiV1Repository::API => "/api/v1/"
   mount ApiV1Users::API => "/api/v1/"
+  mount ApiV1Xuis::API => "/api/v1/"
   #######################################
 
 end

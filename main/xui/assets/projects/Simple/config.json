@@ -1,0 +1,31 @@
+﻿{list:[{
+	id:'xui_project_tpl_ClassicLayout',
+	caption:{
+		en:'Classic Layout',
+		cn:'空白布局'
+	}
+},{
+	id:'xui_project_tplcode_OrderManagement',
+	caption:{
+		en:'Order Management',
+		cn:'订单管理'
+	}
+},{
+	id:'xui_project_tplcode_OutLook',
+	caption:{
+		en:'OutLook',
+		cn:'邮件管理'
+	}
+},{
+	id:'xui_project_tplcode_AnimatorDemo',
+	caption:{
+		en:'Animator Test',
+		cn:'动画测试'
+	}
+},{
+	id:'xui_project_tpl_ActionsDemo',
+	caption:{
+		en:'Actions Demo',
+		cn:'动作配置'
+	}
+}]}

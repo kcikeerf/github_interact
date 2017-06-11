@@ -1,0 +1,5 @@
+en:
+  api:
+    repo:
+      E52001: "Create repository failed!"
+      E53001: "Upload files to repository failed!"

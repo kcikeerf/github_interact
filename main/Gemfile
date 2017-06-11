@@ -54,6 +54,10 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+# redis
+gem 'redis'
+gem 'redis-namespace'
+
 # api gem
 gem 'grape'
 
@@ -62,3 +66,6 @@ gem 'aws-sdk'
 gem 'aws-sdk-rails'
 gem 'aws-record'
 gem 'github_api', :github => "piotrmurach/github"
+
+
+gem 'rdoc'
