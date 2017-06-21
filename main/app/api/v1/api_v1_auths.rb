@@ -29,7 +29,7 @@ module ApiV1Auths
         scope_arr << %W{ delete_repo read:org user:email }
         state_str = SecureRandom.urlsafe_base64(nil, false)
         callback_prefix = "http://protobuilder.io/api/v1/auths/github_callback"
-        callback_url = callback_prefix + "?forward_to=" + params[:callback_url]
+        callback_url = callback_prefix + "?forward_to=" + params[:callback_url].to_s
         next_location = "https://github.com/login/oauth/authorize?" +
           "response_type=code&" +
           "redirect_uri=" + callback_url + "&" +
@@ -51,7 +51,7 @@ module ApiV1Auths
       end
       get :github_callback do
         token = github.get_token(params[:code])
-        forward_url = params[:forward_to] || "http://protobuilder.io"
+        forward_url = params[:forward_to].blank? ? "http://protobuilder.io" : params[:forward_to]
         status 307
         header 'location', forward_url + "?access_token=#{token.token}"
       end
