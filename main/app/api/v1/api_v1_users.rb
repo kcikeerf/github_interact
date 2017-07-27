@@ -24,7 +24,7 @@ module ApiV1Users
         use :oauth
       end
       post :info do
-        format_response(current_user)
+        format_response(params,current_user)
       end
 
       ###########
