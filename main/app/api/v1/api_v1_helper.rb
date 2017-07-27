@@ -91,7 +91,7 @@ module ApiV1Helper
     elsif target_params[:callback].include?(":")
       callback_str = "2,,#{target_params[:callback]}"
     else
-      callback_str = "3,,no"
+      callback_str = "3,,#{target_params[:callback]}"
     end
     callback_arr = callback_str.split(',,')
 
@@ -124,7 +124,8 @@ module ApiV1Helper
 
     #如果request中没有callback
     when 3
-      { :data => target_result }
+      #{ :data => target_result }
+      callback_arr[1] + '(' + data_json + ')'
     end
   end
 
