@@ -104,7 +104,15 @@ module ApiV1Helper
     #如果request中带有callback参数，并且callback不等于"window.name"（例如是"xui.SAjax.No._1"）
     when 2
       header "Content-Type", "text/html"
-      callback_arr[1] + '({"data":' + data_json + '}});'
+      # callback_arr[1] + '({"data":' + data_json + '}});'
+
+      "<script type='text' id='json'>
+        {'data':" + data_json + "}
+      </script>
+      <script type='text/javascript'>
+        parent.postMessage(document.getElementById('json').innerHTML,'" + str.sub(re, '\1')+ "');
+      </script>"
+
     #如果request中没有callback
     when 3
       { :data => target_result }
@@ -114,6 +122,5 @@ module ApiV1Helper
   def file_to_base64 path
     Base64.encode64(File.open(path, "rb").read)
   end
-
 
 end
