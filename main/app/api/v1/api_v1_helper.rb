@@ -115,12 +115,12 @@ module ApiV1Helper
       header "Content-Type", "text/html"
       # callback_arr[1] + '({"data":' + data_json + '}});'
 
-      "<script type='text' id='json'>
-        {'data':" + data_json + "}
+      '<script type="text" id="json">
+        {"data":' + data_json + '}
       </script>
-      <script type='text/javascript'>
-        parent.postMessage(document.getElementById('json').innerHTML,'" + str.sub(re, '\1')+ "');
-      </script>"
+      <script type="text/javascript">
+        parent.postMessage(document.getElementById("json").innerHTML,"' + callback_arr[1].sub(/([^:]+:\/\/[^\/]+).*/, '\1')+ '");
+      </script>'
 
     #如果request中没有callback
     when 3
