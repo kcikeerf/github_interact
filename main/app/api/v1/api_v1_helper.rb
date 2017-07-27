@@ -124,6 +124,7 @@ module ApiV1Helper
 
     #如果request中没有callback
     when 3
+      header "Content-Type", "text/html;charset=UTF-8"
       #{ :data => target_result }
       callback_arr[1] + '(' + data_json + ')'
     end
