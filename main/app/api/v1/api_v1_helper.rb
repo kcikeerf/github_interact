@@ -105,14 +105,14 @@ module ApiV1Helper
     case callback_arr[0].to_i
     #如果request中带有callback参数，并且callback等于"window.name"
     when 1
-      header "Content-Type", "text/html"
+      header "Content-Type", "text/html;charset=UTF-8"
       '<script type="text" id="json">
          {"data":' + data_json + '}
       </script>
       <script type="text/javascript">window.name=document.getElementById("json").innerHTML;</script>'
     #如果request中带有callback参数，并且callback不等于"window.name"（例如是"xui.SAjax.No._1"）
     when 2
-      header "Content-Type", "text/html"
+      header "Content-Type", "text/html;charset=UTF-8"
       # callback_arr[1] + '({"data":' + data_json + '}});'
 
       '<script type="text" id="json">
