@@ -83,7 +83,16 @@ module ApiV1Helper
 
   # Used for format the response data if have callback parameter    
   def format_response target_params, target_result
-    callback_str = target_params[:callback].blank? ? "3,,no" : ((target_params[:callback]=='window.name')? "1,,#{target_params[:callback]}" : "2,,#{target_params[:callback]}")
+    # callback_str = target_params[:callback].blank? ? "3,,no" : ((target_params[:callback]=='window.name')? "1,,#{target_params[:callback]}" : "2,,#{target_params[:callback]}")
+    if target_params[:callback].blank?
+      callback_str = "3,,no"
+    elsif target_params[:callback]=='window.name'
+      callback_str = "1,,#{target_params[:callback]}"
+    elsif target_params[:callback].include?(":")
+      callback_str = "2,,#{target_params[:callback]}"
+    else
+      callback_str = "3,,no"
+    end
     callback_arr = callback_str.split(',,')
 
     case target_result.class.to_s
