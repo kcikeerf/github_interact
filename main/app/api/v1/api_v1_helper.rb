@@ -119,14 +119,14 @@ module ApiV1Helper
         {"data":' + data_json + '}
       </script>
       <script type="text/javascript">
-        parent.postMessage(document.getElementById("json").innerHTML,"' + callback_arr[1].sub(/([^:]+:\/\/[^\/]+).*/, '\1')+ '");
+        parent.postMessage(document.getElementById("json").innerHTML,"' + (callback_arr[1] || "").sub(/([^:]+:\/\/[^\/]+).*/, '\1')+ '");
       </script>'
 
     #如果request中没有callback
     when 3
       header "Content-Type", "text/html;charset=UTF-8"
       #{ :data => target_result }
-      callback_arr[1] + '(' + data_json + ')'
+      (callback_arr[1] || "")  + '(' + data_json + ')'
     end
   end
 
