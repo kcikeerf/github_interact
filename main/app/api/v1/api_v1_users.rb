@@ -28,7 +28,16 @@ module ApiV1Users
       end
 
       ###########
-      
+
+      desc ''
+      params do
+        use :oauth
+      end
+      get :info do
+        format_response(params,current_user)
+      end
+
+      ###########      
     end #auths end
 
   end #class end
