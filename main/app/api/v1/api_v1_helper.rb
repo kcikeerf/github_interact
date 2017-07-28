@@ -38,7 +38,16 @@ module ApiV1Helper
       http.request(req) 
     }
     
-    JSON.parse(res.body)
+    # JSON.parse(res.body)
+    if res.body.blank?
+      {}
+    else
+      if res.body.include?("Bad credentials")
+        {error: {code: "-100", message: "error message"}}
+      else
+        JSON.parse(res.body)
+      end
+    end    
   end
 
   def github_req target_api, http_method, param_data={}, header_h={}
@@ -78,7 +87,15 @@ module ApiV1Helper
       http.request(req) 
     }
 
-    res.body.blank?? {} : JSON.parse(res.body)
+    if res.body.blank?
+      {}
+    else
+      if res.body.include?("Bad credentials")
+        {error: {code: "-100", message: "error message"}}
+      else
+        JSON.parse(res.body)
+      end
+    end
   end
 
   # Used for format the response data if have callback parameter    
