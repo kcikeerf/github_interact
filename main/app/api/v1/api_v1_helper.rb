@@ -107,7 +107,7 @@ module ApiV1Helper
     when 1
       header "Content-Type", "text/html;charset=UTF-8"
       '<script type="text" id="json">
-         {"data":' + data_json + '}
+         ({"data":' + data_json + '})
       </script>
       <script type="text/javascript">window.name=document.getElementById("json").innerHTML;</script>'
     #如果request中带有callback参数，并且callback不等于"window.name"（例如是"xui.SAjax.No._1"）
@@ -116,7 +116,7 @@ module ApiV1Helper
       # callback_arr[1] + '({"data":' + data_json + '}});'
 
       '<script type="text" id="json">
-        {"data":' + data_json + '}
+        ({"data":' + data_json + '})
       </script>
       <script type="text/javascript">
         parent.postMessage(document.getElementById("json").innerHTML,"' + (callback_arr[1] || "").sub(/([^:]+:\/\/[^\/]+).*/, '\1')+ '");
