@@ -25,14 +25,15 @@ module ApiV1Helper
     "https://api.github.com"
   end
 
-  def current_user
+  def current_user _current_token=nil
+    target_token = params[:access_token] || _current_token
     target_api = github_base_url + "/user"
     uri = URI(target_api)
     req = Net::HTTP::Get.new(target_api)
     req['User-Agent'] = 'xui'
     req['Accept'] = 'application/json'
     req['Content-Type'] = 'application/json'
-    req['Authorization'] = "token #{params[:access_token]}"
+    req['Authorization'] = "token #{target_token}"
 
     res = Net::HTTP.start(uri.host, uri.port, :use_ssl => true) {|http|
       http.request(req) 
@@ -48,6 +49,32 @@ module ApiV1Helper
         JSON.parse(res.body)
       end
     end    
+  end
+
+  def current_ddb_user
+    item = DdbUserTokens.where(token: params[:access_token]).first
+    item.blank? ? nil : item.ddb_user
+  end
+
+  def error_if_current_ddb_user_expired!
+    error!("You have used up all your payment, please charge to continue.", 500) if current_ddb_user.expired?
+  end
+
+  def record_user_token! _current_token=nil
+    github_user = current_user(_current_token)
+    target_user = Ddb::User.where(github_name: github_user["login"]).first
+    unless target_user
+      target_user = Ddb::User.new({
+        github_name: github_user["login"],
+        github_id: github_user["id"],
+        expired_at: Time.now
+      })
+      target_user.save!
+    end
+    Ddb::UserTokens.new({
+      token: _current_token,
+      ddb_user_ids: [target_user.id]
+    }).save!
   end
 
   def github_req target_api, http_method, param_data={}, header_h={}

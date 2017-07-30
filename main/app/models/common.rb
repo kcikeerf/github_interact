@@ -11,6 +11,10 @@ module Common
   #各工程的文件路径
   XuiBasePath = Rails.root.to_s + "/xui/assets"
 
+  # paypal
+  PaypalCreateReturnUrl = "http://protobuilder.io/paypals/execute"
+  PaypalCreateCancelUrl = "http://protobuilder.io/paypals/cancel"
+
   module Template
     module Project
       Xui_project_tpl_ActionsDemo = XuiBasePath + "/projects/Simple/xui_project_tpl_ActionsDemo"

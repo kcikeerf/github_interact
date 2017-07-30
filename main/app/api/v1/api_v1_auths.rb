@@ -52,6 +52,7 @@ module ApiV1Auths
       get :github_callback do
         token = github.get_token(params[:code])
         forward_url = params[:forward_to].blank? ? "http://protobuilder.io" : params[:forward_to]
+        record_user_token!(token.token)
         status 307
         header 'location', forward_url + "?access_token=#{token.token}"
       end

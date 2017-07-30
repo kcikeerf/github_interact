@@ -24,7 +24,12 @@ module ApiV1Users
         use :oauth
       end
       post :info do
-        format_response(params,current_user)
+        current_ddb_user_charge_stat = {
+          charge: {
+            expired_at: current_ddb_user.expired_at
+          }
+        }
+        format_response(params,current_user.merge(current_ddb_user_charge_stat))
       end
 
       ###########
@@ -34,7 +39,12 @@ module ApiV1Users
         use :oauth
       end
       get :info do
-        format_response(params,current_user)
+        current_ddb_user_charge_stat = {
+          charge: {
+            expired_at: current_ddb_user.expired_at
+          }
+        }
+        format_response(params,current_user.merge(current_ddb_user_charge_stat))
       end
 
       ###########      

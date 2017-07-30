@@ -11,7 +11,7 @@ GIT
       oauth2 (~> 1.0)
 
 GEM
-  remote: https://rubygems.org/
+  remote: https://ruby.taobao.org/
   specs:
     actioncable (5.1.1)
       actionpack (= 5.1.1)
@@ -70,6 +70,8 @@ GEM
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
     bindex (0.5.0)
+    braintree (2.76.0)
+      builder (>= 2.0.0)
     builder (3.2.3)
     byebug (9.0.6)
     capybara (2.14.0)
@@ -93,6 +95,10 @@ GEM
     concurrent-ruby (1.0.5)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
+    dynamoid (1.3.3)
+      activemodel (>= 4)
+      aws-sdk-resources (~> 2)
+      concurrent-ruby (>= 1.0)
     equalizer (0.0.11)
     erubi (1.6.0)
     execjs (2.7.0)
@@ -146,6 +152,9 @@ GEM
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
+    paypal-sdk-rest (1.6.0)
+      multi_json (~> 1.0)
+      xml-simple
     puma (3.8.2)
     rack (2.0.3)
     rack-accept (0.4.5)
@@ -232,6 +241,7 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
+    xml-simple (1.1.5)
     xpath (2.1.0)
       nokogiri (~> 1.3)
 
@@ -242,13 +252,16 @@ DEPENDENCIES
   aws-record
   aws-sdk
   aws-sdk-rails
+  braintree
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
+  dynamoid
   github_api!
   grape
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
+  paypal-sdk-rest
   puma (~> 3.7)
   rails (~> 5.1.1)
   redis

@@ -14,6 +14,7 @@ module ApiV1Repository
     resource :repository do #monitorings begin
 
       before do
+        error_if_current_ddb_user_expired!
         set_resp_header
       end
 

@@ -1,5 +1,5 @@
-source 'https://rubygems.org'
-#source 'https://ruby.taobao.org'
+#source 'https://rubygems.org'
+source 'https://ruby.taobao.org'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -62,7 +62,12 @@ gem 'redis-namespace'
 gem 'grape'
 
 #amazon
+gem 'dynamoid'
 gem 'aws-sdk'
 gem 'aws-sdk-rails'
 gem 'aws-record'
 gem 'github_api', :github => "piotrmurach/github"
+
+#paypal
+gem 'paypal-sdk-rest'
+gem "braintree"
