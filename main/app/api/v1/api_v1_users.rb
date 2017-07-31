@@ -24,7 +24,7 @@ module ApiV1Users
         use :oauth
       end
       post :info do
-        user_time_left = current_ddb_user.expired_at - Time.now
+        user_time_left = current_ddb_user.expired_at.to_i - Time.now.to_i
         current_ddb_user_charge_stat = {
           charge: {
             expired_at: current_ddb_user.expired_at,
@@ -41,7 +41,7 @@ module ApiV1Users
         use :oauth
       end
       get :info do
-        user_time_left = current_ddb_user.expired_at - Time.now
+        user_time_left = current_ddb_user.expired_at.to_i - Time.now.to_i
         current_ddb_user_charge_stat = {
           charge: {
             expired_at: current_ddb_user.expired_at,
