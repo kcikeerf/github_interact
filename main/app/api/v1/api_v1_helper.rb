@@ -62,16 +62,16 @@ module ApiV1Helper
 
   def record_user_token! _current_token=nil
     github_user = current_user(_current_token)
-    target_user = Ddb::User.where(github_name: github_user["login"]).first
+    target_user = DdbUser.where(github_name: github_user["login"]).first
     unless target_user
-      target_user = Ddb::User.new({
+      target_user = DdbUser.new({
         github_name: github_user["login"],
         github_id: github_user["id"],
         expired_at: Time.now
       })
       target_user.save!
     end
-    Ddb::UserTokens.new({
+    DdbUserTokens.new({
       token: _current_token,
       ddb_user_ids: [target_user.id]
     }).save!
