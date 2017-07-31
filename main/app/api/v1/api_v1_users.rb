@@ -24,13 +24,16 @@ module ApiV1Users
         use :oauth
       end
       post :info do
-        user_time_left = current_ddb_user.expired_at.to_i - Time.now.to_i
-        current_ddb_user_charge_stat = {
-          charge: {
-            expired_at: current_ddb_user.expired_at,
-            time_left: ( user_time_left > 0 ) ? user_time_left : 0
+        current_ddb_user_charge_stat = {}
+        if current_ddb_user.expired_at
+          user_time_left = current_ddb_user.expired_at.to_i - Time.now.to_i
+          current_ddb_user_charge_stat = {
+            charge: {
+              expired_at: current_ddb_user.expired_at,
+              time_left: ( user_time_left > 0 ) ? user_time_left : 0
+            }
           }
-        }
+        end
         format_response(params,current_user.merge(current_ddb_user_charge_stat))
       end
 
@@ -41,13 +44,16 @@ module ApiV1Users
         use :oauth
       end
       get :info do
-        user_time_left = current_ddb_user.expired_at.to_i - Time.now.to_i
-        current_ddb_user_charge_stat = {
-          charge: {
-            expired_at: current_ddb_user.expired_at,
-            time_left: ( user_time_left > 0 ) ? user_time_left : 0
+        current_ddb_user_charge_stat = {}
+        if current_ddb_user.expired_at
+          user_time_left = current_ddb_user.expired_at.to_i - Time.now.to_i
+          current_ddb_user_charge_stat = {
+            charge: {
+              expired_at: current_ddb_user.expired_at,
+              time_left: ( user_time_left > 0 ) ? user_time_left : 0
+            }
           }
-        }
+        end
         format_response(params,current_user.merge(current_ddb_user_charge_stat))
       end
 
