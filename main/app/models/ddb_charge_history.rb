@@ -4,8 +4,8 @@
 class DdbChargeHistory
   include Dynamoid::Document
 
-  belongs_to :ddb_user
-  belongs_to :ddb_charge_plan
+  belongs_to :ddb_user, :class => DdbUser
+  belongs_to :ddb_charge_plan, :class => DdbChargePlan
 
   field :cmethod, :string, {default: "paypal"}
   field :payment_id

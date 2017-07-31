@@ -63,21 +63,25 @@ module ApiV1PayPals
           _target_user = current_ddb_user
           _payment_id = _payment.id
           begin
-            Rails.logger.info _target_user.id
-            Rails.logger.info _target_charge_plan.id
-            Rails.logger.info _payment_id
-          item = DdbChargeHistory.new({
-            ddb_user_ids: [_target_user.id],
-            ddb_charge_plan_ids: [_target_charge_plan.id],
-            payment_id: _payment_id
-          })
-          item.save
-          Rails.logger.
-          raise item.errors unless item
-        rescue Exception => ex
-          Rails.logger.info ex.message
-          Rails.logger.info ex.backtrace
-        end
+            item = DdbChargeHistory.new({
+              ddb_user_ids: [_target_user.id],
+              ddb_charge_plan_ids: [_target_charge_plan.id],
+              payment_id: _payment_id
+            })
+            item.save!
+            _target_user.ddb_charge_histories.push(item)
+            _target_user.save!
+            _target_charge_plan.ddb_charge_histories.push(item)
+            _target_charge_plan.save!
+          rescue Exception => ex
+            Rails.logger.info ex.message
+            Rails.logger.info ex.backtrace
+            item.destroy
+            status 500
+            {
+              message: "error!"
+            }
+          end
           {
             "payment_id": _payment_id
           }

@@ -4,7 +4,7 @@
 class DdbChargePlan
   include Dynamoid::Document
 
-  has_many :ddb_charge_histories
+  has_many :ddb_charge_histories, :class => DdbChargeHistory
 
   field :name
   field :description
