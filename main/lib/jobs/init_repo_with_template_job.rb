@@ -9,7 +9,7 @@ class InitRepoWithTemplateJob < GithubBaseJob
     @tpl_files = Common::iterate_all_files_in_path(@tpl_path)
     @tpl_files.each_with_index{|tpl, index|
       define_singleton_method( "phase" + index.to_s ) {
-        target_content = Common::file_to_base64(tpl)
+        target_content = File.open(tpl, 'rb').read
         target_path = tpl.split(@tpl_path + "/")[1]
         logger.info target_path
         UploadFilesToRepositoryJob.new({
