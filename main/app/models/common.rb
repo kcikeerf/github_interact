@@ -23,21 +23,29 @@ module Common
       Xui_project_tplcode_OrderManagement = XuiBasePath + "/projects/Simple/xui_project_tplcode_OrderManagement"
       Xui_project_tplcode_OutLook = XuiBasePath + "/projects/Simple/xui_project_tplcode_OutLook"
     end
+
+    module ProjectBase64
+      Xui_project_tpl_ActionsDemo = XuiBasePath + "/projects_base64/Simple/xui_project_tpl_ActionsDemo"
+      Xui_project_tpl_ClassicLayout = XuiBasePath + "/projects_base64/Simple/xui_project_tpl_ClassicLayout"
+      Xui_project_tplcode_AnimatorDemo = XuiBasePath + "/projects_base64/Simple/xui_project_tplcode_AnimatorDemo"
+      Xui_project_tplcode_OrderManagement = XuiBasePath + "/projects_base64/Simple/xui_project_tplcode_OrderManagement"
+      Xui_project_tplcode_OutLook = XuiBasePath + "/projects_base64/Simple/xui_project_tplcode_OutLook"
+    end
   end
 
   # 获取模版路径
   def get_project_tpl_path target_path
     result = nil
     if target_path.include?("xui_project_tpl_ActionsDemo")
-      result = Template::Project::Xui_project_tpl_ActionsDemo
+      result = Template::ProjectBase64::Xui_project_tpl_ActionsDemo
     elsif target_path.include?("xui_project_tpl_ClassicLayout")
-      result = Template::Project::Xui_project_tpl_ClassicLayout
+      result = Template::ProjectBase64::Xui_project_tpl_ClassicLayout
     elsif target_path.include?("xui_project_tplcode_AnimatorDemo")
-      result = Template::Project::Xui_project_tplcode_AnimatorDemo
+      result = Template::ProjectBase64::Xui_project_tplcode_AnimatorDemo
     elsif target_path.include?("xui_project_tplcode_OrderManagement")
-      result = Template::Project::Xui_project_tplcode_OrderManagement
+      result = Template::ProjectBase64::Xui_project_tplcode_OrderManagement
     elsif target_path.include?("xui_project_tplcode_OutLook")
-      result = Template::Project::Xui_project_tplcode_OutLook
+      result = Template::ProjectBase64::Xui_project_tplcode_OutLook
     end
     result
   end
