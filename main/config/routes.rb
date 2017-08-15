@@ -11,5 +11,6 @@ Rails.application.routes.draw do
     mount ApiV1Xuis::API => "/api/v1/"
     mount ApiV1Charges::API => "/api/v1/"
     mount ApiV1PayPals::API => "/api/v1"
+    mount ApiV1Spa::API => "/api/v1"
   # end
 end
