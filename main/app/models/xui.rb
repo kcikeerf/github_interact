@@ -48,7 +48,7 @@ module Xui
 
     if _params["withConfig"]
       f_data = File.open(Rails.root.to_s + "/public/" + _params["path"] + "/config.json").read
-      result[:conf] = f_data
+      result[:conf] = eval(f_data.gsub(/(\t|\r|\n|\/\*|\*\/)/, ""))
     end
 
     if _params["sum"]
