@@ -1,0 +1,24 @@
+﻿{list:[{
+	id:'Simple',
+	caption:{
+		cn:'简单应用'
+	}
+}
+/*,{
+	id:'Prototyping',
+	caption:{
+		cn:'快速原型开发'
+	}
+}
+,{
+	id:'DB',
+	caption:{
+		cn:'数据库管理应用'
+	}
+},
+{
+	id:'MIS',
+	caption:{
+		cn:'管理信息系统应用'
+	}
+}*/]}

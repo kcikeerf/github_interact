@@ -1,0 +1,31 @@
+﻿{list:[{
+	id:'gallery01',
+	caption:{
+		cn:'图标库一'
+	}
+},{
+	id:'gallery02',
+	caption:{
+		cn:'图标库二'
+	}
+},{
+	id:'gallery03',
+	caption:{
+		cn:'图标库三'
+	}
+},{
+	id:'gallery04',
+	caption:{
+		cn:'图标库四'
+	}
+},{
+	id:'gallery05',
+	caption:{
+		cn:'图标库五'
+	}
+},{
+	id:'gallery06',
+	caption:{
+		cn:'图标库六'
+	}
+}]}
