@@ -51,7 +51,8 @@ module Xui
     f_objs =  Dir.glob( Rails.root.to_s + "/public/" + _params[:path] + "/**" )
     result[:files] = []
     f_objs.each_with_index{|item, index|
-      location = File.dirname(item).sub(Rails.root.to_s+"/public/", "")
+      #location = File.dirname(item).sub(Rails.root.to_s+"/public/", "")
+      location = item.sub(Rails.root.to_s+"/public/", "")
       result[:files] << {
         id: "*.#{index}",
         layer: 0,
