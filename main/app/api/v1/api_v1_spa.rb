@@ -2,7 +2,7 @@
 
 module ApiV1Spa
   class API < Grape::API
-    format :json
+    format :txt
 
     helpers ApiV1Helper
     helpers ApiV1SharedParamsHelper
@@ -40,8 +40,12 @@ module ApiV1Spa
         use :oauth
       end
       get '/' do
-        result = Xui::Spa::split_with_xui_spa_parameters(JSON.parse(params[:paras]))
-        Rails.logger.info result
+        _temp_h = JSON.parse(params[:paras])
+        _params_h = {}
+        _temp_h.each{|k,v|
+          _params_h[k.to_sym] = v
+        }
+        result = Xui::Spa::split_with_xui_spa_parameters(_params_h.merge({:access_token => params[:access_token]}))
         format_response(params, result)
       end
 

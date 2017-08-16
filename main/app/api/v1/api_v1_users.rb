@@ -2,7 +2,7 @@
 
 module ApiV1Users
   class API < Grape::API
-    format :json
+    format :txt
 
     helpers ApiV1Helper
     helpers ApiV1SharedParamsHelper
