@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-# 
+#
 
+Dir.glob('lib/jobs/**').each{|a| require Rails.root.to_s + "/" + a}
 
 module Xui
   module_function
