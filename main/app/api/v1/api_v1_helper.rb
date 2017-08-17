@@ -165,7 +165,7 @@ module ApiV1Helper
     when 3
       header "Content-Type", "text/javascript;charset=UTF-8"
       #{ :data => target_result }
-      (callback_arr[1] || "")  + '(' + data_json + ')'
+      (callback_arr[1] || "")  + '({"data":' + data_json + '})'
     end
   end
 
