@@ -54,10 +54,11 @@ module ApiV1Helper
   def current_ddb_user
     item = DdbUserTokens.where(token: params[:access_token]).first
     item.blank? ? nil : item.ddb_user
+    error!("User not found.", 404) if item && item.ddb_user.blank?
   end
 
   def error_if_current_ddb_user_expired!
-    error!("You have used up all your payment, please charge to continue.", 500) if current_ddb_user.expired?
+    #error!("You have used up all your payment, please charge to continue.", 402) if current_ddb_user && current_ddb_user.expired?
   end
 
   def record_user_token! _current_token=nil
@@ -164,7 +165,7 @@ module ApiV1Helper
     when 3
       header "Content-Type", "text/javascript;charset=UTF-8"
       #{ :data => target_result }
-      (callback_arr[1] || "")  + '(' + data_json + ')'
+      (callback_arr[1] || "")  + '(' + JSON.parsedata_json + ')'
     end
   end
 
