@@ -54,7 +54,7 @@ module ApiV1Users
         #     }
         #   }
         # end
-        format_response(params,current_user.merge(current_ddb_user_charge_stat))
+        format_response(params,current_user.merge(current_ddb_user_charge_stat), "users")
       end
 
       ###########      

@@ -127,7 +127,7 @@ module ApiV1Helper
   end
 
   # Used for format the response data if have callback parameter    
-  def format_response target_params, target_result
+  def format_response target_params, target_result, _module=nil
     # callback_str = target_params[:callback].blank? ? "3,,no" : ((target_params[:callback]=='window.name')? "1,,#{target_params[:callback]}" : "2,,#{target_params[:callback]}")
     if target_params[:callback].blank?
       callback_str = "3,,"
@@ -165,7 +165,12 @@ module ApiV1Helper
     when 3
       header "Content-Type", "text/javascript;charset=UTF-8"
       #{ :data => target_result }
-      (callback_arr[1] || "")  + '({"data":' + data_json + '})'
+      case _module
+      when "users"
+        (callback_arr[1] || "")  + '(' + data_json + ')'
+      else
+        (callback_arr[1] || "")  + '({"data":' + data_json + '})'
+      end
     end
   end
 
